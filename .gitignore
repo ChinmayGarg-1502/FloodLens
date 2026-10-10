@@ -7,6 +7,15 @@ node_modules/
 .venv/
 venv/
 
+# Python
+__pycache__/
+*.py[cod]
+
+# FloodLens generated files
+uploads/
+weights/
+road_detected.jpg
+
 # Misc
 .DS_Store
 *.log
