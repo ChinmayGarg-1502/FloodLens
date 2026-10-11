@@ -111,8 +111,9 @@ if __name__ == "__main__":
         verify_report(confirmations=4, disputes=1)
     )
 
+
 def analyze_pothole_detection(detection_result):
-    """Convert AI detections into a FloodLens hazard summary."""
+    """Summarize AI detections without treating count as physical severity."""
 
     if not detection_result.get("success"):
         return {
@@ -121,17 +122,30 @@ def analyze_pothole_detection(detection_result):
         }
 
     detections = detection_result.get("detections", [])
-    pothole_count = len(detections)
 
-    if pothole_count == 0:
-        severity = "low"
-    elif pothole_count <= 2:
-        severity = "medium"
-    else:
-        severity = "high"
+    # Keep only detections labelled as potholes.
+    potholes = [
+        item for item in detections
+        if item.get("label", "").lower() == "pothole"
+    ]
 
+    pothole_count = len(potholes)
+
+    # Confidence describes the model's certainty, not hazard severity.
+    confidences = [
+        float(item["confidence"])
+        for item in potholes
+        if isinstance(item.get("confidence"), (int, float))
+    ]
+
+    average_confidence = (
+        round(sum(confidences) / len(confidences), 3)
+        if confidences else None
+    )
+
+    # Physical severity cannot be reliably inferred from count alone.
     risk = classify_hazard_risk(
-        severity=severity,
+        severity="medium",
         trust_score=30,
         confirmations=0
     )
@@ -140,12 +154,14 @@ def analyze_pothole_detection(detection_result):
         "success": True,
         "hazard_type": "pothole",
         "potholes_detected": pothole_count,
-        "severity_estimate": severity,
-        "risk_score": risk["risk_score"],
-        "risk_level": risk["risk_level"],
+        "average_detection_confidence": average_confidence,
+        "severity_estimate": "unknown",
+        "risk_score": None,
+        "risk_level": "UNASSESSED",
+        "preliminary_priority": risk["risk_level"],
         "message": (
             f"AI detected {pothole_count} possible pothole(s). "
+            "Physical severity and road risk have not been assessed. "
             "Please verify the result."
         )
     }
-
