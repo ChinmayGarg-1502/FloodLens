@@ -1,196 +1,182 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#07111f">
-
-    <meta
-        name="description"
-        content="FloodLens — flood monitoring and climate risk intelligence."
-    >
-
+    <meta name="description" content="FloodLens — flood monitoring and climate risk intelligence.">
     <title>FloodLens | Flood Intelligence</title>
+    
+    <!-- Leaflet Map CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <link rel="stylesheet" href="./style.css">
 </head>
-
 <body>
 
     <!-- Navigation -->
-    <header class="site-header">
-
-        <a href="#hero" class="brand">
-            Flood<span>Lens</span>
+    <header class="site-header" style="position: sticky; top: 0; z-index: 1000; background: #07111f; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e3a5f;">
+        <a href="#hero" class="brand" style="color: white; text-decoration: none; font-size: 24px; font-weight: bold;">
+            Flood<span style="color: #3b82f6;">Lens</span>
         </a>
 
-        <nav class="main-nav" aria-label="Main navigation">
-            <a href="#hero" class="active">Overview</a>
-            <a href="#monitoring">Monitoring</a>
-            <a href="#risk">Risk Analysis</a>
+        <nav class="main-nav" aria-label="Main navigation" style="display: flex; gap: 20px;">
+            <a href="#hero" style="color: white; text-decoration: none;">Overview</a>
+            <a href="#monitoring" style="color: white; text-decoration: none;">Monitoring</a>
+            <a href="#risk" style="color: white; text-decoration: none;">Risk Analysis</a>
+            <a href="#report" style="color: #3b82f6; text-decoration: none; font-weight: bold;">Report Hazard</a>
         </nav>
 
-        <div class="header-status">
-            <span class="status-dot"></span>
+        <div class="header-status" style="color: #cbd5e1; font-size: 14px;">
+            <span class="status-dot" style="display: inline-block; width: 8px; height: 8px; background: #10b981; border-radius: 50%; margin-right: 5px;"></span>
             Flood Intelligence
         </div>
-
     </header>
-
 
     <!-- Main content -->
     <main>
-
         <!-- Hero section -->
         <section id="hero" class="hero-section">
-
-            <p class="eyebrow">
-                CLIMATE INTELLIGENCE PLATFORM
-            </p>
-
-            <h1>
-                See the risk.<br>
-                Understand the <span>impact.</span>
-            </h1>
-
+            <p class="eyebrow">CLIMATE INTELLIGENCE PLATFORM</p>
+            <h1>See the risk.<br>Understand the <span>impact.</span></h1>
             <p class="hero-description">
                 Explore flood monitoring and risk insights in one place.
                 Turn geospatial information into a clearer picture of flood risk.
             </p>
-
             <div class="hero-actions">
                 <a href="#monitoring" class="primary-button">
-                    Explore monitoring
-                    <span aria-hidden="true">↗</span>
+                    Explore monitoring <span aria-hidden="true">↗</span>
                 </a>
-
-                <a href="#risk" class="secondary-button">
-                    Discover risk analysis
-                </a>
+                <a href="#risk" class="secondary-button">Discover risk analysis</a>
             </div>
-
             <div class="hero-note">
                 <span class="note-line"></span>
                 Geospatial intelligence for a changing climate
             </div>
-
         </section>
-
 
         <!-- Monitoring section -->
         <section id="monitoring" class="content-section">
-
             <div class="section-heading">
                 <div>
                     <p class="section-label">01 / MONITORING</p>
                     <h2>Flood monitoring</h2>
                     <p class="section-description">
-                        A dedicated workspace for exploring flood events
-                        and their geographic context.
+                        A dedicated workspace for exploring flood events and their geographic context.
                     </p>
                 </div>
-
                 <span class="section-marker">GEOSPATIAL VIEW</span>
             </div>
-
             <div class="monitoring-panel">
-
                 <div class="panel-topbar">
                     <div>
                         <span class="panel-indicator"></span>
                         <span class="panel-title">Monitoring workspace</span>
                     </div>
-
                     <span class="panel-tag">MAP VIEW</span>
                 </div>
-
-                <div class="map-placeholder">
-                    <div class="map-grid"></div>
-
-                    <div class="map-message">
-                        <span class="map-icon" aria-hidden="true">⌖</span>
-
-                        <h3>Geospatial monitoring</h3>
-
-                        <p>
-                            The map will be connected to the project's
-                            actual geographic data and flood layers.
-                        </p>
-
-                        <span class="map-caption">
-                            MAP INTEGRATION PENDING
-                        </span>
-                    </div>
-                </div>
+                
+                <!-- NEW MAP CONTAINER -->
+                <div id="monitoringMap" style="height: 500px; width: 100%; border-radius: 8px; z-index: 1; border: 1px solid #1e3a5f;"></div>
 
                 <div class="panel-footer">
                     <span>FloodLens / Monitoring</span>
-                    <span>Awaiting map integration</span>
+                    <span>Live Map Active</span>
                 </div>
-
             </div>
-
         </section>
-
 
         <!-- Risk analysis section -->
         <section id="risk" class="content-section risk-section">
-
             <div class="section-heading">
                 <div>
                     <p class="section-label">02 / RISK INTELLIGENCE</p>
                     <h2>Understand the risk</h2>
                     <p class="section-description">
-                        A future workspace for presenting verified flood
-                        risk assessments and related insights.
+                        A future workspace for presenting verified flood risk assessments and related insights.
                     </p>
                 </div>
             </div>
-
             <div class="risk-panel">
-
                 <div class="risk-symbol" aria-hidden="true">↗</div>
-
                 <div>
                     <h3>Risk analysis workspace</h3>
-
-                    <p>
-                        Risk indicators, severity levels, and analysis
-                        results will appear here once connected to
-                        the project's real data.
-                    </p>
+                    <p>Risk indicators, severity levels, and analysis results will appear here once connected to the project's real data.</p>
                 </div>
-
                 <span class="risk-status">NOT CONNECTED</span>
-
             </div>
-
         </section>
 
+        <!-- Hazard Reporting Section -->
+        <section id="report" class="content-section">
+            <div class="section-heading">
+                <div>
+                    <p class="section-label">03 / REPORT</p>
+                    <h2>Report a Hazard</h2>
+                    <p class="section-description">Submit details and upload a photo for AI analysis.</p>
+                </div>
+            </div>
+
+            <!-- Form Container -->
+            <div style="background: #0b1524; padding: 30px; border-radius: 12px; border: 1px solid #1e3a5f; margin-top: 20px;">
+                <form id="reportForm" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div>
+                        <label for="location_name" style="display: block; margin-bottom: 8px; color: #fff; font-weight: bold;">Location Name *</label>
+                        <input type="text" id="location_name" required placeholder="e.g., MG Road, Sector 12" style="width: 100%; padding: 12px; background: #0f1c2e; border: 1px solid #1e3a5f; color: white; border-radius: 6px; box-sizing: border-box; font-family: inherit;">
+                    </div>
+
+                    <div>
+                        <label for="description" style="display: block; margin-bottom: 8px; color: #fff; font-weight: bold;">Description *</label>
+                        <textarea id="description" required placeholder="Describe the hazard..." style="width: 100%; padding: 12px; background: #0f1c2e; border: 1px solid #1e3a5f; color: white; border-radius: 6px; min-height: 100px; box-sizing: border-box; font-family: inherit; resize: vertical;"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="severity" style="display: block; margin-bottom: 8px; color: #fff; font-weight: bold;">Severity *</label>
+                        <select id="severity" required style="width: 100%; padding: 12px; background: #0f1c2e; border: 1px solid #1e3a5f; color: white; border-radius: 6px; box-sizing: border-box; font-family: inherit; appearance: auto;">
+                            <option value="High" style="background: #0f1c2e; color: #fff;">High</option>
+                            <option value="Medium" style="background: #0f1c2e; color: #fff;">Medium</option>
+                            <option value="Low" style="background: #0f1c2e; color: #fff;">Low</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; gap: 20px;">
+                        <div style="flex: 1;">
+                            <label for="latitude" style="display: block; margin-bottom: 8px; color: #fff; font-weight: bold;">Latitude</label>
+                            <input type="number" id="latitude" step="any" placeholder="e.g., 28.7041" style="width: 100%; padding: 12px; background: #0f1c2e; border: 1px solid #1e3a5f; color: white; border-radius: 6px; box-sizing: border-box; font-family: inherit;">
+                        </div>
+                        <div style="flex: 1;">
+                            <label for="longitude" style="display: block; margin-bottom: 8px; color: #fff; font-weight: bold;">Longitude</label>
+                            <input type="number" id="longitude" step="any" placeholder="e.g., 77.1025" style="width: 100%; padding: 12px; background: #0f1c2e; border: 1px solid #1e3a5f; color: white; border-radius: 6px; box-sizing: border-box; font-family: inherit;">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="image" style="display: block; margin-bottom: 8px; color: #fff; font-weight: bold;">Upload Hazard Photo (For AI Analysis)</label>
+                        <input type="file" id="image" accept=".jpg, .jpeg, .png, .webp" style="width: 100%; padding: 12px; background: #0f1c2e; border: 1px solid #1e3a5f; color: white; border-radius: 6px; box-sizing: border-box; font-family: inherit;">
+                    </div>
+
+                    <button type="submit" style="padding: 15px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 16px; transition: background 0.2s;">Submit Report & Analyze</button>
+                </form>
+
+                <!-- AI Output Display -->
+                <div id="aiResult" style="display: none; margin-top: 25px; padding: 20px; border: 1px solid #1e3a5f; border-radius: 6px; background: #080f1a;">
+                    <h3 style="margin-top: 0; color: #60a5fa; font-size: 18px;">AI Analysis Result</h3>
+                    <p id="aiMessage" style="color: #cbd5e1; margin-bottom: 15px;"></p>
+                    <img id="aiOutputImage" src="" alt="AI Processed Image" style="max-width: 100%; border-radius: 6px; display: none; border: 1px solid #1e3a5f;">
+                </div>
+            </div>
+        </section>
 
         <!-- Footer -->
         <footer class="site-footer">
-
-            <a href="#hero" class="brand footer-brand">
-                Flood<span>Lens</span>
-            </a>
-
-            <p>
-                Flood intelligence for a more resilient future.
-            </p>
-
-            <span class="footer-version">
-                FRONTEND PREVIEW
-            </span>
-
+            <a href="#hero" class="brand footer-brand">Flood<span>Lens</span></a>
+            <p>Flood intelligence for a more resilient future.</p>
+            <span class="footer-version">FRONTEND PREVIEW</span>
         </footer>
-
     </main>
-
 
     <!-- JavaScript -->
     <script src="./script.js"></script>
-
 </body>
 </html>
