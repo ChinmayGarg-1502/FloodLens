@@ -1,0 +1,24 @@
+[
+  {
+    "reportId": "FL-DEMO-001",
+    "locationName": "Example Road, Sector 15",
+    "description": "Water accumulating near the junction",
+    "latitude": 28.6139,
+    "longitude": 77.2090,
+    "severity": "High",
+    "status": "Unverified",
+    "createdAt": "2026-10-11T08:00:00Z",
+    "updatedAt": "2026-10-11T08:00:00Z"
+  },
+  {
+    "reportId": "FL-DEMO-002",
+    "locationName": "Example Market Road",
+    "description": "Rainwater covering part of the road",
+    "latitude": 28.6200,
+    "longitude": 77.2150,
+    "severity": "Medium",
+    "status": "Unverified",
+    "createdAt": "2026-10-11T08:15:00Z",
+    "updatedAt": "2026-10-11T08:15:00Z"
+  }
+]

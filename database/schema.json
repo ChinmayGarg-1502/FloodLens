@@ -1,0 +1,56 @@
+{
+  "table_name": "FloodReports",
+  "database": "Amazon DynamoDB",
+  "primary_key": "reportId",
+  "fields": {
+    "reportId": {
+      "type": "String",
+      "required": true,
+      "description": "Unique ID for each report"
+    },
+    "description": {
+      "type": "String",
+      "required": true,
+      "description": "Description of the waterlogging"
+    },
+    "locationName": {
+      "type": "String",
+      "required": true,
+      "description": "Street or area name"
+    },
+    "latitude": {
+      "type": "Number",
+      "required": false,
+      "description": "Latitude of the incident"
+    },
+    "longitude": {
+      "type": "Number",
+      "required": false,
+      "description": "Longitude of the incident"
+    },
+    "severity": {
+      "type": "String",
+      "required": true,
+      "allowed_values": ["Low", "Medium", "High"]
+    },
+    "status": {
+      "type": "String",
+      "required": true,
+      "allowed_values": [
+        "Unverified",
+        "Corroborated",
+        "Resolved"
+      ]
+    },
+    "createdAt": {
+      "type": "String",
+      "required": true,
+      "description": "Creation time in ISO 8601 UTC format"
+    },
+    "updatedAt": {
+      "type": "String",
+      "required": true,
+      "description": "Last update time in ISO 8601 UTC format"
+    }
+  }
+}
