@@ -77,7 +77,7 @@
                     <span class="panel-tag">MAP VIEW</span>
                 </div>
                 
-                <!-- NEW MAP CONTAINER -->
+                <!-- MAP CONTAINER -->
                 <div id="monitoringMap" style="height: 500px; width: 100%; border-radius: 8px; z-index: 1; border: 1px solid #1e3a5f;"></div>
 
                 <div class="panel-footer">
@@ -94,17 +94,34 @@
                     <p class="section-label">02 / RISK INTELLIGENCE</p>
                     <h2>Understand the risk</h2>
                     <p class="section-description">
-                        A future workspace for presenting verified flood risk assessments and related insights.
+                        Live analytics and city-wide risk assessment based on active hazard reports.
                     </p>
                 </div>
             </div>
-            <div class="risk-panel">
-                <div class="risk-symbol" aria-hidden="true">↗</div>
-                <div>
-                    <h3>Risk analysis workspace</h3>
-                    <p>Risk indicators, severity levels, and analysis results will appear here once connected to the project's real data.</p>
+            
+            <div class="risk-panel" id="riskDashboard" style="padding: 30px;">
+                <div style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap;">
+                    
+                    <!-- Score Display -->
+                    <div style="flex: 1; min-width: 200px; background: #0f1c2e; padding: 20px; border-radius: 8px; border: 1px solid #1e3a5f; text-align: center;">
+                        <h3 style="margin: 0; color: #cbd5e1; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;">Overall Status</h3>
+                        <div id="riskLevelDisplay" style="font-size: 32px; font-weight: bold; margin: 15px 0; color: #10b981;">CALCULATING...</div>
+                        <p id="riskScoreDisplay" style="margin: 0; color: #94a3b8; font-size: 14px;">Risk Score: 0</p>
+                    </div>
+
+                    <!-- Metrics Breakdown -->
+                    <div style="flex: 2; min-width: 250px;">
+                        <h3 style="margin-top: 0; color: #fff; font-size: 20px;">Live Impact Metrics</h3>
+                        <p style="color: #94a3b8; font-size: 14px; margin-bottom: 15px;">Algorithm calculates score based on active hazard volume and severity weights.</p>
+                        <ul style="list-style: none; padding: 0; color: #cbd5e1; line-height: 2; font-size: 16px;">
+                            <li>🔴 High Severity Reports: <strong id="countHigh" style="color: white; margin-left: 10px;">0</strong></li>
+                            <li>🟠 Medium Severity Reports: <strong id="countMedium" style="color: white; margin-left: 10px;">0</strong></li>
+                            <li>🟢 Low Severity Reports: <strong id="countLow" style="color: white; margin-left: 10px;">0</strong></li>
+                            <li style="border-top: 1px solid #1e3a5f; margin-top: 10px; padding-top: 10px;">📊 Total Active Hazards: <strong id="countTotal" style="color: #3b82f6; margin-left: 10px;">0</strong></li>
+                        </ul>
+                    </div>
+
                 </div>
-                <span class="risk-status">NOT CONNECTED</span>
             </div>
         </section>
 
